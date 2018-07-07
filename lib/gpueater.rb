@@ -134,7 +134,6 @@ module GPUEater
       unless form['tag']
         form['tag'] = ""
       end
-      p form
       raise "required product_id" unless form['product_id']
       raise "required image" unless form['image']
       raise "required ssh_key_id" unless form['ssh_key_id']
@@ -148,7 +147,7 @@ module GPUEater
       return j
     end
 
-    def terminate(form)
+    def terminate_instance(form)
       j = nil
       raise "required instance_id" unless form['instance_id']
       raise "required machine_resource_id" unless form['machine_resource_id']
