@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Pegara, Inc."]
   spec.email         = ["info@pegara.com"]
 
-  spec.summary       = %q{GPUEater Console API}
+  spec.summary       = %q{GPUEater API Console}
   spec.description   = %q{This module is API for GPUEater web console.}
   spec.homepage      = "https://www.gpueater.com/"
   spec.license       = "MIT"

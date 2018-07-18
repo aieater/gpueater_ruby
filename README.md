@@ -1,7 +1,7 @@
-# GPUEater Console API
+# GPUEater API Console
 
 ## Getting Started
-GPUEater is a cloud computing service focusing on Machine Learning and Deep Learning. Now, AMD Radeon GPUs and NVIDIA Quadro GPUs are available. 
+GPUEater is a cloud computing service focusing on Machine Learning and Deep Learning. Now, AMD Radeon GPUs and NVIDIA Quadro GPUs are available.
 
 This document is intended to describe how to set up this API and how to control your instances through this API.
 
@@ -9,7 +9,7 @@ Before getting started, register your account on GPUEater.
 https://www.gpueater.com/
 
 ### Prerequisites
-1. Ruby 2.x is required to run GPUEater Console API.
+1. Ruby 2.x is required to run GPUEater API Console.
 2. Create a JSON file in accordance with the following instruction.
 
 At first, open your account page(https://www.gpueater.com/console/account) and copy your access_token. The next, create a JSON file on ~/.eater
@@ -87,7 +87,7 @@ puts g.image_list()
 
 #### Instance launch
 
-Specify product, OS image, and ssh_key for instance launching. 
+Specify product, OS image, and ssh_key for instance launching.
 
 ```
 require('gpueater')
@@ -110,7 +110,7 @@ res = g.launch_ondemand_instance(param)
 puts res
 ```
 In the event, the request has succeeded, then the API returns the following empty data.
-{data:null, error:null} 
+{data:null, error:null}
 
 In the event, errors occurred during the instance instantiation process, then the API returns details about the error.
 
@@ -136,6 +136,86 @@ res.select{|e| e['tag'] == 'HappyGPUProgramming' }.each{|e|
 	puts g.terminate_instance(e)
 }
 ```
+
+-----
+
+
+#### API list
+
+##### Image
+- image_list
+- ~~snapshot_instance(form)~~
+- ~~delete_snapshot(form)~~
+- ~~create_image(form)~~
+- ~~register_image(form)~~
+- ~~delete_image(form)~~
+
+##### SSH Key
+- ssh_key_list
+- generate_ssh_key
+- register_ssh_key(form)
+- delete_ssh_key(form)
+
+##### Instance
+- ondemand_list
+- subscription_list
+- launch_ondemand_instance(form)
+- launch_subcription_instance(form)
+- instance_list
+- change_instance_tag(form)
+- start_instance(form)
+- stop_instance(form)
+- restart_instance(form)
+- terminate_instance(form)
+- emergency_restart_instance(form)
+
+##### Network
+- port_list
+- open_port(form)
+- close_port(form)
+- renew_ipv4(form)
+- refresh_ipv4(form)
+- network_description(form)
+
+##### Storage
+- ~~create_volume(form)~~
+- ~~delete_volume(form)~~
+- ~~transfer_volume(form)~~
+
+##### Subscription
+- ~~subscription_instance_list~~
+- ~~subscription_storage_list~~
+- ~~subscription_network_list~~
+- ~~subscribe_instance(form)~~
+- ~~unsubscribe_instance(form)~~
+- ~~subscribe_storage(form)~~
+- ~~unsubscribe_storage(form)~~
+- ~~subscribe_network(form)~~
+- ~~unsubscribe_network(form)~~
+
+##### Special
+- ~~live_migration(form)~~
+- ~~cancel_transaction(form)~~
+
+##### Payment
+- invoice_list
+- ~~subscription_invoice_list~~
+- ~~make_invoice(form)~~
+
+##### Extensions
+- ~~copy_file(form)~~
+- ~~delete_file(form)~~
+- ~~move_file(form)~~
+- ~~make_directory(form)~~
+- ~~file_list(form)~~
+- ~~synchronize_files(form)~~
+- ~~login_instance(form)~~
+- ~~tunnel(form)~~
+
+##### Instanciate
+- new
+
+
 
 ## License
 
