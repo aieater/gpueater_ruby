@@ -242,12 +242,9 @@ module GPUEater
     def transfer_volume;                raise "Not implemented yet"; end #@
     
     def _________subscription__________;end #@
-    def subscribe_instance_list;                  raise "Not implemented yet"; end #@
-    def subscribe_storage_list;                  raise "Not implemented yet"; end #@
-    def subscribe_network_list;                  raise "Not implemented yet"; end #@
-    def subscribe_instance;                  raise "Not implemented yet"; end #@
-    def unsubscribe_instance;                  raise "Not implemented yet"; end #@
     def subscription_instance_list;                  raise "Not implemented yet"; end #@
+    def subscription_storage_list;                  raise "Not implemented yet"; end #@
+    def subscription_network_list;                  raise "Not implemented yet"; end #@
     def subscribe_instance;                  raise "Not implemented yet"; end #@
     def unsubscribe_instance;                  raise "Not implemented yet"; end #@
     def subscribe_storage;                  raise "Not implemented yet"; end #@

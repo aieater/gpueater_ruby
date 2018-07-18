@@ -158,9 +158,9 @@ res.select{|e| e['tag'] == 'HappyGPUProgramming' }.each{|e|
 
 ##### Instance
 - ondemand_list
-- subscription_list
+- ~~subscription_list~~
 - launch_ondemand_instance(form)
-- launch_subcription_instance(form)
+- ~~launch_subcription_instance(form)~~
 - instance_list
 - change_instance_tag(form)
 - start_instance(form)
