@@ -146,11 +146,11 @@ res.select{|e| e['tag'] == 'HappyGPUProgramming' }.each{|e|
 |  Version  |  Function  | Required | Description  |
 | ---- | ---- | ---- | ---- |
 |  v0.8  |  image_list()  |  | Listing OS images. |
-|  v1.5  |  snapshot_instance(form)  |  |  Take a snapshot from instance. |
-|  v1.5  |  delete_snapshot(form)  |  |  Delete a snapshot. |
-|  v1.5  |  create_image(form)  |  |  Create an user defined default OS image from instance. |
-|  v2.0  |  register_image(form)  |  |  Register an other image from internet. |
-|  v1.5  |  delete_image(form)  |  |  Delete a registered image. |
+|  v1.5  |  snapshot_instance(form)  | instance_id, machine_resource_id |  Take a snapshot from instance. |
+|  v1.5  |  delete_snapshot(form)  | instance_id, machine_resource_id |  Delete a snapshot. |
+|  v1.5  |  create_image(form)  | instance_id, machine_resource_id |  Create an user defined default OS image from instance. |
+|  v2.0  |  register_image(form)  | url |  Register an other image from internet. |
+|  v1.5  |  delete_image(form)  | image |  Delete a registered image. |
 
 
 ##### SSH Key
