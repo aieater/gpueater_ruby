@@ -237,8 +237,7 @@ g.terminate_instance(instance)
 ##### Extensions
 |  Version  |  Function  | Required | Description  |
 | ---- | ---- | ---- | ---- |
-|  v1.2  |  copy_file(form)  | action("get"or"put"), src, dst |  Copying a file. The "get" obtains a file from a remote host to your local host, and "put" is the opposite. The "src" is a file path, and the "dst" is a destination file path
- |
+|  v1.2  |  copy_file(form)  | action("get"or"put"), src, dst |  Copying a file. The "get" obtains a file from a remote host to your local host, and "put" is the opposite. The "src" is a file path, and the "dst" is a destination file path |
 |  v1.2  |  delete_file(form)  | src, recursive |  Deleting a remote file |
 |  v1.2  |  move_file(form)  | action("get"or"put"), src, dst |  Move a file. The "get" obtains a file from a remote host to your local host, and "put" is the opposite. The "src" is a file path, and the "dst" is a destination file path |
 |  v1.2  |  make_directory(form)  | dst |  Making a directory in a remote host |
