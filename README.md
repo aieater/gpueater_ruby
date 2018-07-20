@@ -145,40 +145,40 @@ res.select{|e| e['tag'] == 'HappyGPUProgramming' }.each{|e|
 ##### Image
 |  Version  |  Function  | Required | Description  |
 | ---- | ---- | ---- | ---- |
-|  v0.8  |  image_list()  |  | Listing OS images. |
-|  v1.5  |  snapshot_instance(form)  | instance_id, machine_resource_id |  Take a snapshot from instance. |
-|  v1.5  |  delete_snapshot(form)  | instance_id, machine_resource_id |  Delete a snapshot. |
-|  v1.5  |  create_image(form)  | instance_id, machine_resource_id |  Create an user defined default OS image from instance. |
-|  v2.0  |  register_image(form)  | url |  Register an other image from internet. |
-|  v1.5  |  delete_image(form)  | image |  Delete a registered image. |
+|  v0.8  |  image_list()  |  | Listing all OS images |
+|  v1.5  |  snapshot_instance(form)  | instance_id, machine_resource_id |  Creating a snapshot |
+|  v1.5  |  delete_snapshot(form)  | instance_id, machine_resource_id |  Deleting a snapshot |
+|  v1.5  |  create_image(form)  | instance_id, machine_resource_id |  Adding an OS image of snapshot |
+|  v2.0  |  register_image(form)  | url |  Registering an OS image of snapshot on the internet |
+|  v1.5  |  delete_image(form)  | image |  Deleting an OS image |
 
 
 ##### SSH Key
 |  Version  |  Function  | Required | Description  |
 | ---- | ---- | ---- | ---- |
-|  v0.8  |  ssh_key_list()  |  |  Listing registered ssh keys. |
-|  v1.0  |  generate_ssh_key()  |  |  Generate SSH key pair. This API just generate, so you have to register after this. |
-|  v1.0  |  register_ssh_key(form)  | name, public_key |  Register a SSH key. |
-|  v1.0  |  delete_ssh_key(form)  | id |  Delete a registered SSH key. |
+|  v0.8  |  ssh_key_list()  |  |  Listing all ssh keys |
+|  v1.0  |  generate_ssh_key()  |  |  Generating Key Pair |
+|  v1.0  |  register_ssh_key(form)  | name, public_key |  Registering an SSH key |
+|  v1.0  |  delete_ssh_key(form)  | id |  Deleting an SSH key |
 
 
 
 ##### Instance
 |  Version  |  Function  | Required | Description  |
 | ---- | ---- | ---- | ---- |
-|  v0.8  |  ondemand_list()  |  |  Listing on-demand instances. |
-|  v2.0  |  subscription_list()  |  |  Listing subscription instances. |
-|  v0.8  |  launch_ondemand_instance(form)  | product_id, image, ssh_key_id |  Launch an on-demand instance. |
-|  v2.0  |  launch_subcription_instance(form)  | subscription_id, image, ssh_key_id |  Launch an on-demand instance. |
-|  v0.8  |  instance_list()  |  |  Listing launched instances. |
-|  v1.0  |  change_instance_tag(form)  | instance_id, tag |  Change instance tag. |
-|  v1.0  |  start_instance(form)  | instance_id, machine_resource_id |  Start instance. When the instance was already RUNNING, it will be nothing happen. |
-|  v1.0  |  stop_instance(form)  | instance_id, machine_resource_id |  Stop instance. When the instance was already STOPPED, it will be nothing happen. |
-|  v1.0  |  restart_instance(form)  | instance_id, machine_resource_id |  Restart instance. |
-|  v0.8  |  terminate_instance(form)  | instance_id, machine_resource_id |  Terminate instance. |
-|  v1.0  |  emergency_restart_instance(form)  | instance_id, machine_resource_id |  If communication with the GPU becomes impossible, we provide a function for emergency restart. |
+|  v0.8  |  ondemand_list()  |  |  Listing all on-demand instances |
+|  v2.0  |  subscription_list()  |  |  Listing all subscription instances |
+|  v0.8  |  launch_ondemand_instance(form)  | product_id, image, ssh_key_id |  Launch an on-demand instance |
+|  v2.0  |  launch_subcription_instance(form)  | subscription_id, image, ssh_key_id |  Launch a subscription instance |
+|  v0.8  |  instance_list()  |  |  Listing all launched instances |
+|  v1.0  |  change_instance_tag(form)  | instance_id, tag |  Changing an instance tag |
+|  v1.0  |  start_instance(form)  | instance_id, machine_resource_id |  Starting an instance. If the instance is already RUNNING, nothing is going to happen |
+|  v1.0  |  stop_instance(form)  | instance_id, machine_resource_id |  Stopping an instance. If the instance is already STOPPED, nothing is going to happen |
+|  v1.0  |  restart_instance(form)  | instance_id, machine_resource_id |  Restarting an instance |
+|  v0.8  |  terminate_instance(form)  | instance_id, machine_resource_id |  Terminating an instance |
+|  v1.0  |  emergency_restart_instance(form)  | instance_id, machine_resource_id |  Restarting an instance emergently when an instance is hung up |
 
-machine_resource_id is including instance object, you don't need to mind the parameters.
+The "machine_resource_id" is including an instance object.  See the following sample code.
 
 Example:
 ```
@@ -193,65 +193,65 @@ g.terminate_instance(instance)
 ##### Network
 |  Version  |  Function  | Required | Description  |
 | ---- | ---- | ---- | ---- |
-|  v1.0  |  port_list(form)  | instance_id |  Listing ports. |
-|  v1.0  |  open_port(form)  | instance_id, connection_id, port |  Forward a specified port. |
-|  v1.0  |  close_port(form)  | instance_id, connection_id, port |  Close a specified port. |
-|  v1.0  |  renew_ipv4(form)  | instance_id |  Get a new IPv4, and assign to instance. |
-|  v1.0  |  refresh_ipv4(form)  | instance_id |  Rebuild port mappings. |
-|  v1.0  |  network_description(form)  | instance_id |  This API reports some network status. |
+|  v1.0  |  port_list(form)  | instance_id |  Listing all ports |
+|  v1.0  |  open_port(form)  | instance_id, connection_id, port |  Opening a port for inbound traffic |
+|  v1.0  |  close_port(form)  | instance_id, connection_id, port |  Closing a port for inbound traffic |
+|  v1.0  |  renew_ipv4(form)  | instance_id |  Getting a new IPv4 address |
+|  v1.0  |  network_description(form)  | instance_id |  This API reports current network status information |
 
 ##### Storage
 |  Version  |  Function  | Required | Description  |
 | ---- | ---- | ---- | ---- |
-|  v2.0  |  create_volume(form)  | size |  Create a extended volume. |
-|  v2.0  |  attach_volume(form)  | volume_id, instance_id |  Attach a extended volume to specified instance. |
-|  v2.0  |  delete_volume(form)  | volume_id |  Delete a extended volume. |
-|  v2.0  |  transfer_volume(form)  | volume_id,region_id |  Transfer a volume to other region. |
+|  v2.0  |  create_volume(form)  | size |  Creating an extended volume |
+|  v2.0  |  attach_volume(form)  | volume_id, instance_id |  Attaching an extended volume to an instance |
+|  v2.0  |  delete_volume(form)  | volume_id |  Deleting an extended volume |
+|  v2.0  |  transfer_volume(form)  | volume_id,region_id |  Transfering an extended volume to another region |
 
 ##### Subscription
 |  Version  |  Function  | Required | Description  |
 | ---- | ---- | ---- | ---- |
-|  v2.0  |  subscription_instance_list()  |  |  Listing subscription instances. |
-|  v2.0  |  subscription_storage_list()  |  |  Listing subscription storages. |
-|  v2.0  |  subscription_network_list()  |  |  Listing subscription networks. |
-|  v2.0  |  subscribe_instance(form)  | subscription_id |  Subscribe instance product. |
-|  v2.0  |  unsubscribe_instance(form)  | subscription_id |  Unsubscribe instance product. |
-|  v2.0  |  subscribe_storage(form)  | subscription_id |  Subscribe storage product. |
-|  v2.0  |  unsubscribe_storage(form)  | subscription_id |  Unsubscribe storage product. |
-|  v2.0  |  subscribe_network(form)  | subscription_id |  Subscribe network product. |
-|  v2.0  |  unsubscribe_network(form)  | subscription_id |  Unsubscribe network product. |
+|  v2.0  |  subscription_instance_list()  |  |  Listing all items of subscription instance |
+|  v2.0  |  subscription_storage_list()  |  |  Listing all items of storages volume for subscription instance |
+|  v2.0  |  subscription_network_list()  |  |  Listing all items of subscription networks |
+|  v2.0  |  subscribe_instance(form)  | subscription_id |  Subscribing a subscription instance |
+|  v2.0  |  unsubscribe_instance(form)  | subscription_id |  Canceling a subscription instance |
+|  v2.0  |  subscribe_storage(form)  | subscription_id |  Subscribing a storage volume for subscription instance |
+|  v2.0  |  unsubscribe_storage(form)  | subscription_id |  Canceling a storage volume for subscription instance |
+|  v2.0  |  subscribe_network(form)  | subscription_id |  Subscribing a network product |
+|  v2.0  |  unsubscribe_network(form)  | subscription_id |  Canceling a network product |
 
 ##### Special
 |  Version  |  Function  | Required | Description  |
 | ---- | ---- | ---- | ---- |
-|  v2.5  |  live_migration(form)  | product_id, region_id, connection_id |  Upgrade and downgrade instance type and region. Old instance will be terminated automatically. |
-|  v2.5  |  cancel_transaction(form)  | transaction_id |  Cancel any transaction. |
-|  v2.5  |  peak_transaction(form)  | transaction_id |  Get a progress of any transaction. |
+|  v2.5  |  live_migration(form)  | product_id, region_id, connection_id |  Moving a running instance between different physical machines without termination |
+|  v2.5  |  cancel_transaction(form)  | transaction_id |  Canceling a transaction |
+|  v2.5  |  peak_transaction(form)  | transaction_id |  This API reports current status information of a transaction |
 
 ##### Payment
 |  Version  |  Function  | Required | Description  |
 | ---- | ---- | ---- | ---- |
-|  v1.0  |  invoice_list()  |  |  Listing invoices of charged. |
-|  v2.0  |  subscription_invoice_list()  |  |  Listing subscription invoices. |
-|  v1.5  |  make_invoice(form)  | invoice_id |  You can make a invoice document as PDF. |
+|  v1.0  |  invoice_list()  |  |  Listing invoices for on-demand instances |
+|  v2.0  |  subscription_invoice_list()  |  |  Listing invoices for subscription instances |
+|  v1.5  |  make_invoice(form)  | invoice_id |  Obtain a pdf invoice |
 
 ##### Extensions
 |  Version  |  Function  | Required | Description  |
 | ---- | ---- | ---- | ---- |
-|  v1.2  |  copy_file(form)  | action, src, dst |  Copy a file. action is "get" or "post". get meaning is remote to local, and post is local to remote. src is source path. dst is destination path. |
-|  v1.2  |  delete_file(form)  | src, recursive |  Delete remote file. |
-|  v1.2  |  move_file(form)  | action, src, dst |  Move file or directory. action is "get" or "post". get meaning is remote to local, and post is local to remote. src is source path. dst is destination path. |
-|  v1.2  |  make_directory(form)  | dst |  Make a directory in remote. |
-|  v1.2  |  file_list(form)  | src |  Listing remote files. |
-|  v1.2  |  synchronize_files(form)  | action, src, dst |  This API is similar rsync. |
-|  v1.2  |  login_instance(form)  | instance_id | Login to specified instance as SSH2 client. |
-|  v1.2  |  tunnel(form)  | instance_id, port |  This API provides port tunneling between local and remote. |
+|  v1.2  |  copy_file(form)  | action["get"or"put"], src, dst |  Copying a file. The "get" obtains a file from a remote host to your local host, and "put" is the opposite. The "src" is a file path, and the "dst" is a destination file path
+ |
+|  v1.2  |  delete_file(form)  | src, recursive |  Deleting a remote file |
+|  v1.2  |  move_file(form)  | action["get"or"put"], src, dst |  Move a file. The "get" obtains a file from a remote host to your local host, and "put" is the opposite. The "src" is a file path, and the "dst" is a destination file path |
+|  v1.2  |  make_directory(form)  | dst |  Making a directory in a remote host |
+|  v1.2  |  file_list(form)  | src |  Listing all files in a remote host |
+|  v1.2  |  synchronize_files(form)  | action, src, dst |  This API is similar to the "rsync" |
+|  v1.2  |  login_instance(form)  | instance_id | Logging in a specific instance through the SSH |
+|  v1.2  |  tunnel(form)  | instance_id, port |  This API enables a port tunneling between your local and a remote host |
 
 ##### Class API
 |  Version  |  Function  | Required | Description  |
 | ---- | ---- | ---- | ---- |
-|  v0.8  |  new()  |  |  Instanciate gpueater object. |
-|  v0.8  |  flist()  |  |  Lisintg available APIs. |
+|  v0.8  |  new()  |  |  Instantiating a gpueater object |
+|  v0.8  |  apilist()  |  |  Listing all available APIs. |
 
 
 
