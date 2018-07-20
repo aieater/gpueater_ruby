@@ -165,6 +165,7 @@ res.select{|e| e['tag'] == 'HappyGPUProgramming' }.each{|e|
 require 'fileutils'
 require 'gpueater'
 
+g = GPUEater.new
 
 # delete old keys.
 keyname = 'my_ssh_key2'
