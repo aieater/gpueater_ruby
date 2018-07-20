@@ -167,18 +167,20 @@ require 'gpueater'
 
 g = GPUEater.new
 
-# delete old keys.
 keyname = 'my_ssh_key2'
+
+
+# delete old keys.
 g.ssh_key_list().select{|e| g.delete_ssh_key(e) if e["name"] == keyname }
 
 
-homedir     = File.expand_path('~')
 
 # generate key pair and register public key.
 key = g.generate_ssh_key
 g.register_ssh_key({"name"=>keyname,"public_key"=>key["public_key"]})
 
 # store private key to ~/.ssh/***.pem file.
+homedir     = File.expand_path('~')
 pem = File.join(homedir,'.ssh',keyname+".pem")
 fp = open(pem,"w")
 fp.write(key["private_key"])
