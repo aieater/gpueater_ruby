@@ -8,7 +8,7 @@ require 'fileutils'
 module GPUEater
   class APIv1
     def initialize
-      @debug = true
+      @debug = false
       @base = 'https://www.gpueater.com'
       if ENV['GPUEATER_URL']
         @base = ENV['GPUEATER_URL']
@@ -31,7 +31,12 @@ module GPUEater
       begin
         @g_config = JSON.load(open(".eater").read)
       rescue
-        @g_config = JSON.load(open(File.join(@homedir,".eater")).read)
+        begin
+          @g_config = JSON.load(open(File.join(@homedir,".eater")).read)
+        rescue
+          puts "You have to define to ~/.eater"
+          exit(9)
+        end
       end
 
       begin

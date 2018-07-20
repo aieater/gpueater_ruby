@@ -72,7 +72,7 @@ This API returns your registered ssh keys.
 require('gpueater')
 
 g = GPUEater.new
-puts g.ssh_keys()
+puts g.ssh_key_list()
 ```
 
 #### Get OS image list
@@ -161,7 +161,35 @@ res.select{|e| e['tag'] == 'HappyGPUProgramming' }.each{|e|
 |  v1.0  |  register_ssh_key(form)  | name, public_key |  Registering an SSH key |
 |  v1.0  |  delete_ssh_key(form)  | id |  Deleting an SSH key |
 
+```
+require 'fileutils'
+require 'gpueater'
 
+
+# delete old keys.
+keyname = 'my_ssh_key2'
+g.ssh_key_list().select{|e| g.delete_ssh_key(e) if e["name"] == keyname }
+
+
+homedir     = File.expand_path('~')
+
+# generate key pair and register public key.
+key = g.generate_ssh_key
+g.register_ssh_key({"name"=>keyname,"public_key"=>key["public_key"]})
+
+# store private key to ~/.ssh/***.pem file.
+pem = File.join(homedir,'.ssh',keyname+".pem")
+fp = open(pem,"w")
+fp.write(key["private_key"])
+fp.close
+
+# change mode.
+FileUtils.chmod(0600,pem)
+
+
+puts g.ssh_key_list
+
+```
 
 ##### Instance
 |  Version  |  Function  | Required | Description  |
