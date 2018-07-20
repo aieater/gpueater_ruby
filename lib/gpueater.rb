@@ -101,6 +101,9 @@ module GPUEater
       def find_product(n)
         @products.select{|v| v['name'] == n }.pop
       end
+  	  def to_s
+  	  	[@images,@ssh_keys,@products].to_s
+      end
     end
     
     
