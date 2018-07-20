@@ -35,6 +35,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler", "~> 1.16"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
-  spec.add_development_dependency "faraday", "~> 0.15.2"
-  spec.add_development_dependency "net-http-persistent", "~> 3.0.0"
+  spec.add_dependency "faraday", "~> 0.15.2"
+  spec.add_dependency "net-http-persistent", "~> 3.0.0"
 end
