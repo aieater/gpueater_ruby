@@ -205,8 +205,14 @@ module GPUEater
     def emergency_restart_instance(form);   func_post_inss('/console/servers/emergency_restart',['instance_id','machine_resource_id'],form); end #@
     
     def network_test
-      ins_list = instance_list()
-      puts network_description(ins_list[0])
+      ins = instance_list()[0]
+      puts network_description(ins)
+      ins['port'] = 9999
+      open_port(ins)
+      puts port_list(ins)
+      close_port(ins)
+      puts port_list(ins)
+      
     end
     def test
       pd = ondemand_list
@@ -239,7 +245,7 @@ module GPUEater
     
     
     def __________network__________;end #@
-    def port_list;                      func_get('/console/servers/port_list'); end #@
+    def port_list(form);                func_get('/console/servers/port_list',['instance_id'],form); end #@
     def open_port(form);                func_post('/console/servers/add_port',['instance_id','connection_id','port'],form); end #@
     def close_port(form);               func_post('/console/servers/delete_port',['instance_id','connection_id','port'],form); end #@
     def renew_ipv4(form);               func_post('/console/servers/renew_ipv4',['instance_id'],form); end #@
@@ -303,6 +309,7 @@ if __FILE__ == $0
     #g.test
     g.network_test
   end
+  #test
   def gen
     ret = []
     ret2 = []
