@@ -148,8 +148,8 @@ res.select{|e| e['tag'] == 'HappyGPUProgramming' }.each{|e|
 |  v0.8  |  image_list()  |  | Listing all OS images |
 |  v1.5  |  snapshot_instance(form)  | instance_id, machine_resource_id |  Creating a snapshot |
 |  v1.5  |  delete_snapshot(form)  | instance_id, machine_resource_id |  Deleting a snapshot |
-|  v1.5  |  create_image(form)  | instance_id, machine_resource_id |  Adding an OS image of snapshot |
-|  v2.0  |  register_image(form)  | url |  Registering an OS image of snapshot on the internet |
+|  v1.5  |  create_image(form)  | instance_id, machine_resource_id |  Adding an user defined OS image |
+|  v2.0  |  register_image(form)  | url |  Registering an user defined OS image on the internet |
 |  v1.5  |  delete_image(form)  | image |  Deleting an OS image |
 
 
@@ -281,7 +281,7 @@ g.terminate_instance(instance)
 |  Version  |  Function  | Required | Description  |
 | ---- | ---- | ---- | ---- |
 |  v0.8  |  new()  |  |  Instantiating a gpueater object |
-|  v0.8  |  apilist()  |  |  Listing all available APIs. |
+|  v1.2  |  api_list()  |  |  Listing all available APIs. |
 
 
 
