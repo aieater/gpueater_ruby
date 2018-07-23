@@ -110,7 +110,7 @@ module GPUEater
     
     def func_get(api,required_fields=[],query={}, e=nil, try=2)
       raise e if try <= 0
-      required_fields.each{|v| raise "Required field => #{v}" unless form.include?(v) }
+      required_fields.each{|v| raise "Required field => #{v}" unless query.include?(v) }
       j = nil
       begin
         j = JSON.load(_get(api).body)
