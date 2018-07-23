@@ -274,9 +274,13 @@ module GPUEater
     def cancel_transaction;                  raise "Not implemented yet"; end #@
 
     def _________payment__________;end #@
-    def invoice_list;                  raise "Not implemented yet"; end #@
+    def invoice_list;                  func_get('/console/servers/charge_list'); end #@
     def subscription_invoice_list;     raise "Not implemented yet"; end #@
     def make_invoice;                  raise "Not implemented yet"; end #@
+    
+    def payment_test
+      puts invoice_list
+    end
 
     def _________extensions__________;end #@
     def copy_file;                  raise "Not implemented yet"; end #@
@@ -307,7 +311,7 @@ if __FILE__ == $0
   def test
     g = GPUEater.new
     #g.test
-    g.network_test
+    g.payment_test
   end
   #test
   def gen
