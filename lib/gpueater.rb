@@ -50,6 +50,7 @@ module GPUEater
       puts u if @debug
       response = @conn.get do |req|
         req.url u
+        req.params = q
         @g_header.each{|k,v|
           if v
             req.headers[k] = v
@@ -113,7 +114,7 @@ module GPUEater
       required_fields.each{|v| raise "Required field => #{v}" unless query.include?(v) }
       j = nil
       begin
-        j = JSON.load(_get(api).body)
+        j = JSON.load(_get(api,query).body)
       rescue => e
         relogin
         return func_get(api, required_fields, query, e, try-1)
@@ -203,7 +204,10 @@ module GPUEater
     def terminate_instance(form);           func_post_inss('/console/servers/force_terminate',['instance_id','machine_resource_id'],form); end #@
     def emergency_restart_instance(form);   func_post_inss('/console/servers/emergency_restart',['instance_id','machine_resource_id'],form); end #@
     
-    
+    def network_test
+      ins_list = instance_list()
+      puts network_description(ins_list[0])
+    end
     def test
       pd = ondemand_list
       image = pd.find_image "Ubuntu16.04 x64"
@@ -296,7 +300,8 @@ end
 if __FILE__ == $0
   def test
     g = GPUEater.new
-    g.test
+    #g.test
+    g.network_test
   end
   def gen
     ret = []
