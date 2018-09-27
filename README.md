@@ -229,7 +229,7 @@ g.terminate_instance(instance)
 |  v1.0  |  open_port(form)  | instance_id, connection_id, port |  Opening a port for inbound traffic |
 |  v1.0  |  close_port(form)  | instance_id, connection_id, port |  Closing a port for inbound traffic |
 |  v1.0  |  renew_ipv4(form)  | instance_id |  Getting a new IPv4 address |
-|  v1.0  |  network_description(form)  | instance_id |  This API reports current network status information |
+|  v1.0  |  network_description(form)  | instance_id |  This API reports current network status |
 
 ##### Storage
 |  Version  |  Function  | Required | Description  |
@@ -242,22 +242,22 @@ g.terminate_instance(instance)
 ##### Subscription
 |  Version  |  Function  | Required | Description  |
 | ---- | ---- | ---- | ---- |
-|  v2.0  |  subscription_instance_list()  |  |  Listing all items of subscription instance |
-|  v2.0  |  subscription_storage_list()  |  |  Listing all items of storages volume for subscription instance |
-|  v2.0  |  subscription_network_list()  |  |  Listing all items of subscription networks |
+|  v2.0  |  subscription_instance_list()  |  |  Listing all subscription instances |
+|  v2.0  |  subscription_storage_list()  |  |  Listing all storage volumes |
+|  v2.0  |  subscription_network_list()  |  |  Listing all subscription networks |
 |  v2.0  |  subscribe_instance(form)  | subscription_id |  Subscribing a subscription instance |
 |  v2.0  |  unsubscribe_instance(form)  | subscription_id |  Canceling a subscription instance |
-|  v2.0  |  subscribe_storage(form)  | subscription_id |  Subscribing a storage volume for subscription instance |
-|  v2.0  |  unsubscribe_storage(form)  | subscription_id |  Canceling a storage volume for subscription instance |
+|  v2.0  |  subscribe_storage(form)  | subscription_id |  Subscribing a storage volume |
+|  v2.0  |  unsubscribe_storage(form)  | subscription_id |  Canceling a storage volume |
 |  v2.0  |  subscribe_network(form)  | subscription_id |  Subscribing a network product |
 |  v2.0  |  unsubscribe_network(form)  | subscription_id |  Canceling a network product |
 
 ##### Special
 |  Version  |  Function  | Required | Description  |
 | ---- | ---- | ---- | ---- |
-|  v2.5  |  live_migration(form)  | product_id, region_id, connection_id |  Moving a running instance between different physical machines without termination |
+|  v2.5  |  live_migration(form)  | product_id, region_id, connection_id |  Moving a running instance to another physical machine without termination |
 |  v2.5  |  cancel_transaction(form)  | transaction_id |  Canceling a transaction |
-|  v2.5  |  peak_transaction(form)  | transaction_id |  This API reports current status information of a transaction |
+|  v2.5  |  peak_transaction(form)  | transaction_id |  checking a current transaction status |
 
 ##### Payment
 |  Version  |  Function  | Required | Description  |
