@@ -204,7 +204,7 @@ puts g.ssh_key_list
 |  v0.8  |  instance_list()  |  |  Listing all launched instances |
 |  v1.0  |  change_instance_tag(form)  | instance_id, tag |  Changing an instance tag |
 |  v1.0  |  start_instance(form)  | instance_id, machine_resource_id |  Starting an instance. If the instance is already RUNNING, nothing is going to happen |
-|  v1.0  |  stop_instance(form)  | instance_id, machine_resource_id |  Stopping an instance. If the instance is already STOPPED, nothing is going to happen |
+|  v1.0  |  ~~stop_instance(form)~~(Deprecated)  | instance_id, machine_resource_id |  Stopping an instance. If the instance is already STOPPED, nothing is going to happen |
 |  v1.0  |  restart_instance(form)  | instance_id, machine_resource_id |  Restarting an instance |
 |  v0.8  |  terminate_instance(form)  | instance_id, machine_resource_id |  Terminating an instance |
 |  v1.0  |  emergency_restart_instance(form)  | instance_id, machine_resource_id |  Restarting an instance emergently when an instance is hung up |
@@ -268,14 +268,14 @@ g.terminate_instance(instance)
 ##### Extensions
 |  Version  |  Function  | Required | Description  |
 | ---- | ---- | ---- | ---- |
-|  v1.2  |  copy_file(form)  | action("get"or"put"), src, dst |  Copying a file. "get" obtains a file from a remote host to your local host, and "put" is the opposite. "src" is a source file path, and "dst" is a destination file path |
-|  v1.2  |  delete_file(form)  | src, recursive |  Deleting a remote file |
-|  v1.2  |  move_file(form)  | action("get"or"put"), src, dst |  Moving a file. "get" obtains a file from a remote host to your local host, and "put" is the opposite. "src" is a source file path, and "dst" is a destination file path |
-|  v1.2  |  make_directory(form)  | dst |  Making a directory in a remote host |
-|  v1.2  |  file_list(form)  | src |  Listing all files in a remote host |
-|  v1.2  |  synchronize_files(form)  | action, src, dst |  This API is similar to the "rsync" |
-|  v1.2  |  login_instance(form)  | instance_id | Logging in a specific instance through the SSH |
-|  v1.2  |  tunnel(form)  | instance_id, port |  This API enables a port tunneling between your local and a remote host |
+|  v1.7  |  copy_file(form)  | action("get"or"put"), src, dst |  Copying a file. "get" obtains a file from a remote host to your local host, and "put" is the opposite. "src" is a source file path, and "dst" is a destination file path |
+|  v1.7  |  delete_file(form)  | src, recursive |  Deleting a remote file |
+|  v1.7  |  move_file(form)  | action("get"or"put"), src, dst |  Moving a file. "get" obtains a file from a remote host to your local host, and "put" is the opposite. "src" is a source file path, and "dst" is a destination file path |
+|  v1.7  |  make_directory(form)  | dst |  Making a directory in a remote host |
+|  v1.7  |  file_list(form)  | src |  Listing all files in a remote host |
+|  v1.7  |  synchronize_files(form)  | action, src, dst |  This API is similar to the "rsync" |
+|  v1.7  |  login_instance(form)  | instance_id | Logging in a specific instance through the SSH |
+|  v1.7  |  tunnel(form)  | instance_id, port |  This API enables a port tunneling between your local and a remote host |
 
 ##### Class API
 |  Version  |  Function  | Required | Description  |
