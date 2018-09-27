@@ -146,10 +146,11 @@ res.select{|e| e['tag'] == 'HappyGPUProgramming' }.each{|e|
 |  Version  |  Function  | Required | Description  |
 | ---- | ---- | ---- | ---- |
 |  v0.8  |  image_list()  |  | Listing all OS images |
-|  v1.5  |  snapshot_instance(form)  | instance_id, machine_resource_id |  Creating a snapshot |
-|  v1.5  |  delete_snapshot(form)  | instance_id, machine_resource_id |  Deleting a snapshot |
+|  v1.7  |  snapshot_instance(form)  | instance_id, machine_resource_id |  Creating a snapshot |
+|  v1.7  |  delete_snapshot(form)  | instance_id, machine_resource_id |  Deleting a snapshot |
+|  v1.5  |  registered_image_list()  |  | Listing all user defined OS images |
 |  v1.5  |  create_image(form)  | instance_id, machine_resource_id |  Adding an user defined OS image |
-|  v2.0  |  register_image(form)  | url |  Registering an user defined OS image on the internet |
+|  v2.0  |  import_image(form)  | url |  Registering an user defined OS image on the internet |
 |  v1.5  |  delete_image(form)  | image |  Deleting an OS image |
 
 
@@ -204,7 +205,7 @@ puts g.ssh_key_list
 |  v0.8  |  instance_list()  |  |  Listing all launched instances |
 |  v1.0  |  change_instance_tag(form)  | instance_id, tag |  Changing an instance tag |
 |  v1.0  |  start_instance(form)  | instance_id, machine_resource_id |  Starting an instance. If the instance is already RUNNING, nothing is going to happen |
-|  v1.0  |  ~~stop_instance(form)~~(Deprecated)  | instance_id, machine_resource_id |  Stopping an instance. If the instance is already STOPPED, nothing is going to happen |
+|  v1.0  |  ~~stop_instance(form)~~[Deprecated]  | instance_id, machine_resource_id |  Stopping an instance. If the instance is already STOPPED, nothing is going to happen |
 |  v1.0  |  restart_instance(form)  | instance_id, machine_resource_id |  Restarting an instance |
 |  v0.8  |  terminate_instance(form)  | instance_id, machine_resource_id |  Terminating an instance |
 |  v1.0  |  emergency_restart_instance(form)  | instance_id, machine_resource_id |  Restarting an instance emergently when an instance is hung up |
@@ -263,7 +264,7 @@ g.terminate_instance(instance)
 | ---- | ---- | ---- | ---- |
 |  v1.0  |  invoice_list()  |  |  Listing invoices for on-demand instances |
 |  v2.0  |  subscription_invoice_list()  |  |  Listing invoices for subscription instances |
-|  v1.5  |  make_invoice(form)  | invoice_id |  Obtain a pdf invoice |
+|  v1.7  |  make_invoice(form)  | invoice_id |  Obtain a pdf invoice |
 
 ##### Extensions
 |  Version  |  Function  | Required | Description  |
@@ -281,7 +282,7 @@ g.terminate_instance(instance)
 |  Version  |  Function  | Required | Description  |
 | ---- | ---- | ---- | ---- |
 |  v0.8  |  new()  |  |  Instantiating a gpueater object |
-|  v1.2  |  api_list()  |  |  Listing all available APIs. |
+|  v1.7  |  api_list()  |  |  Listing all available APIs. |
 
 
 
