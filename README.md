@@ -13,13 +13,9 @@ https://www.gpueater.com/
 
 ### AMD RadeonGPU ROCm-TensorFlow information (https://github.com/aieater/rocm_tensorflow_info)
 <br>
-<br>
-<br>
 This README is intended to provide helpful information for Deep Learning developers with AMD ROCm.<br>
 <br>
 Unfortunately, AMD's official repository for ROCm sometimes includes old or missing information. Therefore, on this readme, we will endeavor to describe accurate information based on the knowledge gained by GPUEater infrastructure development and operation.<br>
-<br>
-<br>
 <br>
 <br>
 
@@ -31,6 +27,8 @@ Unfortunately, AMD's official repository for ROCm sometimes includes old or miss
 - Lightweight ROCm-TensorFlow docker
   + ROCm-TensorFlow on GPUEater
   + ROCm-TensorFlow1.8 docker
+
+ROCm information URL : https://github.com/aieater/rocm_tensorflow_info
 <br>
 <br>
 <br>
