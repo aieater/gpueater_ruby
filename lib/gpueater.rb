@@ -24,10 +24,11 @@ module GPUEater
         builder.use Faraday::Request::UrlEncoded
         # builder.use Faraday::Response::Logger
         builder.use Faraday::Adapter::NetHttpPersistent # gem install net-http-persistent
+        builder.options[:timeout] = 1800
       end
       @alist=["raccoon", "dog", "wild boar", "rabbit", "cow", "horse", "wolf", "hippopotamus", "kangaroo", "fox", "giraffe", "bear", "koala", "bat", "gorilla", "rhinoceros", "monkey", "deer", "zebra", "jaguar", "polar bear", "skunk", "elephant", "raccoon dog", "animal", "reindeer", "rat", "tiger", "cat", "mouse", "buffalo", "hamster", "panda", "sheep", "leopard", "pig", "mole", "goat", "lion", "camel", "squirrel", "donkey"]
       @blist=["happy", "glad", "comfortable", "pleased", "delighted", "relieved", "calm", "surprised", "exciting"]
-      
+
       begin
         @g_config = JSON.load(open(".eater").read)
       rescue
@@ -45,6 +46,11 @@ module GPUEater
       end
     end
 
+    # def clear_cache
+    #     puts @cookie_path
+    #     File.delete(@cookie_path)
+    # end
+
 
     def _get(u,q={})
       puts u if @debug
@@ -59,7 +65,7 @@ module GPUEater
       end
       return response
     end
-    
+
     def _post(u,form)
       puts u if @debug
       response = @conn.post do |req|
@@ -106,9 +112,9 @@ module GPUEater
   	  	[@images,@ssh_keys,@products].to_s
       end
     end
-    
-    
-    
+
+
+
     def func_get(api,required_fields=[],query={}, e=nil, try=2)
       raise e if try <= 0
       required_fields.each{|v| raise "Required field => #{v}" unless query.include?(v) }
@@ -136,7 +142,7 @@ module GPUEater
       raise j['error'] if j['error']
       j['data']
     end
-    
+
     def func_post_inss(api,required_fields=[],form={}, e=nil, try=2)
       raise e if try <= 0
       required_fields.each{|v| raise "Required field => #{v}" unless form.include?(v) }
@@ -151,7 +157,7 @@ module GPUEater
       raise j['error'] if j['error']
       j['data']
     end
-    
+
     # def func_post_launch(api,required_fields=[],form={}, e=nil, try=2)
     #   raise e if try <= 0
     #   tag = form['tag']
@@ -175,16 +181,20 @@ module GPUEater
     #   raise j['error'] if j['error']
     #   j['data']
     # end
-    
+
     def ___________image___________;end #@
     def image_list; func_get('/console/servers/images'); end #@
-    def snapshot_instance; raise "Not implemented yet"; end #@
-    def delete_snapshot; raise "Not implemented yet"; end #@
-    def create_image; raise "Not implemented yet"; end #@
-    def register_image; raise "Not implemented yet"; end #@
-    def delete_image; raise "Not implemented yet"; end #@
-    
-    
+    def snapshot_list; func_get('/console/servers/snapshots'); end #@
+    def take_snapshot(form); func_post('/console/servers/take_snapshot',['instance_id','tag'],form); end #@
+    def change_snapshot_tag(form); func_post('/console/servers/change_snapshot_tag',['snapshot_id','tag'],form); end #@
+    def delete_snapshot(form); func_post('/console/servers/delete_snapshot',['snapshot_id'],form); end #@
+
+    def registered_image_list; func_get('/console/servers/registered_image_list'); end #@
+    def create_image(form); func_post('/console/servers/create_user_defined_image',['instance_id','image_name'],form); end #@
+    def delete_image(form); func_post('/console/servers/delete_user_defined_image',['fingerprint'],form); end #@
+    def import_image(form); func_post('/console/servers/import_image',['url','image_name'],form); end #@
+
+
     def ___________ssh_key___________;end #@
     def ssh_key_list;             func_get('/console/servers/ssh_keys'); end #@
     def generate_ssh_key;         func_get('/console/servers/ssh_key_gen'); end #@
@@ -198,52 +208,14 @@ module GPUEater
     def launch_subcription_instance(form);  raise "Not implemented yet"; end #@
     def instance_list;                      func_get('/console/servers/instance_list'); end #@
     def change_instance_tag(form);          func_post('/console/servers/change_instance_tag',['instance_id','tag'],form); end #@
+
     def start_instance(form);               func_post_inss('/console/servers/start',['instance_id','machine_resource_id'],form); end #@
     def stop_instance(form);                func_post_inss('/console/servers/stop',['instance_id','machine_resource_id'],form); end #@
     def restart_instance(form);             func_post_inss('/console/servers/stop',['instance_id','machine_resource_id'],form); func_post_inss('/console/servers/start',['instance_id','machine_resource_id'],form); end #@
     def terminate_instance(form);           func_post_inss('/console/servers/force_terminate',['instance_id','machine_resource_id'],form); end #@
     def emergency_restart_instance(form);   func_post_inss('/console/servers/emergency_restart',['instance_id','machine_resource_id'],form); end #@
-    
-    def network_test
-      ins = instance_list()[0]
-      puts network_description(ins)
-      ins['port'] = 9999
-      open_port(ins)
-      puts port_list(ins)
-      close_port(ins)
-      puts port_list(ins)
-      
-    end
-    def test
-      pd = ondemand_list
-      image = pd.find_image "Ubuntu16.04 x64"
-      ssh_key = pd.find_ssh_key "my_ssh_key2"
-      product = pd.find_product "n1.p400"
-      
-      emergency_restart_instance(instance_list[0]);
-      p image
-      p ssh_key["id"]
-      p product["id"]
-      
-      #launch_ondemand_instance({"tag"=>"ponkoponko","product_id"=>product["id"], "ssh_key_id"=>ssh_key["id"], "image" => image["alias"]});
-      
-      
-      
-      def ssh_key_test
-        key = generate_ssh_key
-        keyname = 'my_ssh_key2'
-        ssh_key_list().select{|e| delete_ssh_key(e) if e["name"] == keyname }
-        register_ssh_key({"name"=>keyname,"public_key"=>key["public_key"]})
-        pem = File.join(@homedir,'.ssh',keyname+".pem")
-        fp = open(pem,"w")
-        fp.write(key["private_key"])
-        fp.close
-        FileUtils.chmod(0600,pem)
-        puts ssh_key_list
-      end
-    end
-    
-    
+
+
     def __________network__________;end #@
     def port_list(form);                func_get('/console/servers/port_list',['instance_id'],form); end #@
     def open_port(form);                func_post('/console/servers/add_port',['instance_id','connection_id','port'],form); end #@
@@ -251,13 +223,13 @@ module GPUEater
     def renew_ipv4(form);               func_post('/console/servers/renew_ipv4',['instance_id'],form); end #@
     def refresh_ipv4(form);             func_post('/console/servers/refresh_ipv4',['instance_id'],form); end #@
     def network_description(form);      func_get('/console/servers/instance_info',['instance_id'],form); end #@
-    
-    
+
+
     def __________storage__________;end #@
     def create_volume;                  raise "Not implemented yet"; end #@
     def delete_volume;                  raise "Not implemented yet"; end #@
     def transfer_volume;                raise "Not implemented yet"; end #@
-    
+
     def _________subscription__________;end #@
     def subscription_instance_list;                  raise "Not implemented yet"; end #@
     def subscription_storage_list;                  raise "Not implemented yet"; end #@
@@ -268,7 +240,7 @@ module GPUEater
     def unsubscribe_storage;                  raise "Not implemented yet"; end #@
     def subscribe_network;                  raise "Not implemented yet"; end #@
     def unsubscribe_network;                  raise "Not implemented yet"; end #@
-    
+
     def _________special__________;end #@
     def live_migration;                  raise "Not implemented yet"; end #@
     def cancel_transaction;                  raise "Not implemented yet"; end #@
@@ -277,7 +249,7 @@ module GPUEater
     def invoice_list;                  func_get('/console/servers/charge_list'); end #@
     def subscription_invoice_list;     raise "Not implemented yet"; end #@
     def make_invoice;                  raise "Not implemented yet"; end #@
-    
+
     def payment_test
       puts invoice_list
     end
@@ -291,16 +263,16 @@ module GPUEater
     def synchronize_files;                  raise "Not implemented yet"; end #@
     def login_instance;                  raise "Not implemented yet"; end #@
     def tunnel;                  raise "Not implemented yet"; end #@
-    
+
     def __________________________;end #@
-    
+
   end
-    
-    
-  
 
 
-  
+
+
+
+
   def self.new #@
     return APIv1.new
   end
@@ -336,7 +308,7 @@ if __FILE__ == $0
         end
       end
     }
-  
+
     st2 = ret2.join("\n")
     fp = open(__FILE__,"w")
     fp.write(st2)
