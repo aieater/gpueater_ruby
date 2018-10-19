@@ -180,9 +180,9 @@ res.select{|e| e['tag'] == 'HappyGPUProgramming' }.each{|e|
 |  v1.7  |  snapshot_instance(form)  | instance_id, machine_resource_id |  Creating a snapshot |
 |  v1.7  |  delete_snapshot(form)  | instance_id, machine_resource_id |  Deleting a snapshot |
 |  v1.5  |  registered_image_list()  |  | Listing all user defined OS images |
-|  v1.5  |  create_image(form)  | instance_id, machine_resource_id |  Adding an user defined OS image |
+|  v1.5  |  create_image(form)  | instance_id',image_name |  Adding an user defined OS image |
 |  v2.0  |  import_image(form)  | url |  Registering an user defined OS image on the internet |
-|  v1.5  |  delete_image(form)  | image |  Deleting an OS image |
+|  v1.5  |  delete_image(form)  | fingerprint |  Deleting an OS image |
 
 
 ##### SSH Key
